@@ -1,5 +1,5 @@
 ---
-title: "Image Generation Models in KoboldCPP Colab"
+title: "Stable Diffusion & FLUX Image Models in KoboldCPP Colab"
 sidebarTitle: "Image Models"
 description: "Enable image generation in KoboldCPP Colab by loading Stable Diffusion or FLUX models. Use presets like Z-Image Turbo, Flux Klein, or Juggernaut XL."
 ---
@@ -12,7 +12,7 @@ KoboldCPP supports image generation through an embedded version of [sd.cpp](http
   <Card title="Z-Image Turbo" icon="bolt">
     **Backend:** FLUX-based  
     **Clip:** Qwen3-4B-Instruct-2507 (Q4\_K\_S)  
-    **VAE:** FLUX.1-dev ae.safetensors  
+    **VAE:** ae.safetensors (FLUX.1-dev)  
 
     A fast FLUX-architecture image model. Uses a Qwen3-4B text encoder as its CLIP replacement and the standard FLUX.1 VAE for decoding.
   </Card>
@@ -36,7 +36,7 @@ KoboldCPP supports image generation through an embedded version of [sd.cpp](http
     **Backend:** SDXL  
     **Size:** ~6.94 GB  
 
-    A photorealistic SDXL model. Produces highly detailed, realistic images. Requires more VRAM than SD 1.5 models.
+    A photorealistic SDXL model. Produces highly detailed, realistic images. No separate clip or VAE required — loads as a single file.
   </Card>
 </CardGroup>
 
@@ -72,10 +72,13 @@ When `LoadImgModel` is active, the following sd.cpp flags are appended to the la
 
 | Flag | Value | Effect |
 |---|---|---|
+| `--sdmodel` | `{ImgModel URL}` | Path to the image model file |
 | `--sdthreads` | `4` | Number of CPU threads for SD operations |
 | `--sdquant` | — | Enables quantisation to reduce VRAM |
 | `--sdclamped` | `768` | Clamps output resolution to 768 px max |
 | `--sdclipgpu` | — | Runs the CLIP text encoder on GPU |
+| `--sdclip1` | `{ImgClip1 URL}` | Text encoder for FLUX models (only added when `ImgClip1` is set) |
+| `--sdvae` | `{ImgVAE URL}` | VAE decoder for FLUX models (only added when `ImgVAE` is set) |
 
 <Tip>
   You can combine image generation with a text model. Tick both **LoadTextModel** and **LoadImgModel**, choose your models, and KoboldCPP will serve both capabilities from the same Cloudflare URL. Keep in mind that running two models simultaneously uses more VRAM — prefer smaller text models (7B–13B) when combining with an image model on Colab's free T4.

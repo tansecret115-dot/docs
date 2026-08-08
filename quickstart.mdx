@@ -22,7 +22,7 @@ Getting started with KoboldCPP Colab Modded takes just a few clicks. You open th
 
     > **GLM-4.7-Flash-REAP** — MoE architecture, 23B-A3B parameters, Q3\_K\_S quantization, 10.3 GB
 
-    You can also switch to **Manual** in the dropdown to provide your own model URL, context size, and other settings.
+    To load your own model instead, check one of the loader checkboxes below the Template dropdown (such as **LoadTextModel**). Checking any loader checkbox activates manual mode and overrides the selected template, letting you specify your own model URL, context size, and other settings.
   </Step>
   <Step title="Click play and wait for the model to load">
     Press the **play button** (▶) on the model cell. Colab will allocate a GPU, install dependencies, download the model weights, and start the KoboldCpp server. Progress messages appear in the cell output as each step completes. Download time varies by model size and Colab's current network speed — most presets are ready in one to three minutes.
@@ -30,7 +30,7 @@ Getting started with KoboldCPP Colab Modded takes just a few clicks. You open th
   <Step title="Copy the Cloudflare URL and connect">
     When startup is complete, a line like the following appears at the bottom of the cell output:
 
-    ```
+    ```text
     https://your-unique-id.trycloudflare.com
     ```
 
@@ -46,15 +46,19 @@ Getting started with KoboldCPP Colab Modded takes just a few clicks. You open th
   Google Colab provides a limited amount of free GPU time per day. Keep the Colab tab open and active for your entire session — closing it may terminate the runtime. Respond to any captcha prompts that Colab displays to confirm you are still present, or the session may be interrupted.
 </Warning>
 
+<Note>
+  The **Delete Existing Models** checkbox is enabled by default. Each time you restart the cell, all previously downloaded model files are deleted and re-downloaded fresh. Uncheck this option if you want to reuse models cached from a previous run in the same Colab session.
+</Note>
+
 ## Popular preset templates
 
 The table below lists some of the most commonly used presets to help you pick a starting point. See [Preset Templates](/models/preset-templates) for the full list.
 
-| Template Name | Category | Size |
-|---|---|---|
-| GLM-4.7-Flash-REAP | MoE (23B-A3B), Q3\_K\_S | 10.3 GB |
-| Gemma4 E4B Uncensored | General, Q5\_K\_M | ~4B |
-| Cydonia 24B | Roleplay, Q4\_K\_S | 24B |
-| Qwen3 VL 8B | Vision, Q6\_K | 8B |
-| Z-Image Turbo | Image | — |
-| Mistral Small 24B | Corporate, Q4\_K\_S | 24B |
+| Template Name | Category | Quantization | Size |
+|---|---|---|---|
+| GLM-4.7-Flash-REAP | Language (MoE) | Q3\_K\_S | 10.3 GB |
+| Gemma4 E4B Uncensored | Language | Q5\_K\_M | ~4B |
+| Cydonia 24B | Roleplay | Q4\_K\_S | 24B |
+| Qwen3 VL 8B | Vision | Q6\_K | 8B |
+| Z-Image Turbo | Image | — | — |
+| Mistral Small 24B | Language | Q4\_K\_S | 24B |

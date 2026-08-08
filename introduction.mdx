@@ -1,7 +1,7 @@
 ---
 title: "KoboldCPP Colab Modded: What It Is and How It Works"
 sidebarTitle: "Introduction"
-description: "Learn what KoboldCPP Colab Modded is, how it uses Google Colab's free GPU to run AI models, and what model types are supported."
+description: "Learn what KoboldCPP Colab Modded is, how it uses Google Colab's free GPU to run AI models, and which model types and features are supported."
 ---
 
 KoboldCPP Colab Modded is a modified Google Colab notebook built on top of [KoboldCpp](https://github.com/LostRuins/koboldcpp), an open-source LLM inference engine. It lets you run large language models, image generators, vision models, text-to-speech engines, music generators, and embedding models directly in Google Colab's cloud GPU environment — completely free, with no local hardware, no installation, and no technical setup required. A built-in Cloudflare tunnel gives you a public URL the moment the model finishes loading, so you can connect from any device or compatible app.
@@ -35,9 +35,17 @@ KoboldCPP Colab Modded supports a broad range of AI model types. Every category 
 
 The notebook is designed to be as simple as possible. You do not need to understand the underlying infrastructure — just press play twice and you are connected.
 
-1. **Cell 1 — Keep-alive (optional):** The first cell plays a silent audio loop to prevent mobile browsers from throttling the background tab. You only need to run this cell if you are on a phone or tablet.
-2. **Cell 2 — Model launcher:** The second cell contains all the configuration options. Select a preset template from the dropdown (or configure a custom model manually), then press the play button. Colab allocates a GPU, downloads the model weights, and starts the KoboldCpp server.
-3. **Cloudflare tunnel URL:** Once the server is running, a Cloudflare tunnel URL appears at the bottom of the cell output. Copy that URL and open it in your browser or paste it into a compatible front-end app. The URL is unique to your session and changes each time you restart.
+<Steps>
+  <Step title="Cell 1 — Keep-alive (optional)">
+    The first cell plays a silent audio loop to prevent mobile browsers from throttling the background tab. You only need to run this cell if you are on a phone or tablet.
+  </Step>
+  <Step title="Cell 2 — Model launcher">
+    The second cell contains all the configuration options. Select a preset template from the dropdown (or configure a custom model manually by checking one of the loader checkboxes), then press the play button. Colab allocates a GPU, downloads the model weights via aria2, and starts the KoboldCpp server.
+  </Step>
+  <Step title="Connect via the Cloudflare tunnel URL">
+    Once the server is running, a Cloudflare tunnel URL appears at the bottom of the cell output. Copy that URL and open it in your browser or paste it into a compatible front-end app. The URL is unique to your session and changes each time you restart.
+  </Step>
+</Steps>
 
 <Note>
   Keep the Colab tab open in your browser for the entire session — closing or navigating away from it will eventually cause the runtime to shut down. Check back occasionally, as Google may display a captcha to verify you are still present.

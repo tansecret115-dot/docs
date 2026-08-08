@@ -1,5 +1,5 @@
 ---
-title: "GPU Layer Offloading in KoboldCPP Colab Modded"
+title: "Configuring GPU Layer Offloading in KoboldCPP Colab"
 sidebarTitle: "GPU Layers"
 description: "Configure how many model layers run on the GPU versus CPU. Use Auto for optimal performance, or set 999 to force all layers onto the GPU."
 ---
@@ -35,3 +35,11 @@ If you are using a preset template, leave **Layers** on **Auto**. Each preset is
 ## Flash Attention
 
 Flash attention is always enabled for every session via the `--flashattention` flag. This optimisation reduces the VRAM cost of the attention mechanism, which effectively gives you a bit more headroom for layers or a larger context size — no configuration needed on your end.
+
+## Deleting Cached Models Between Runs
+
+The notebook includes a **DeleteExistingModels** checkbox (default: **on**). When enabled, every `*.gguf`, `*.bin`, and `*.ggml` file in the Colab workspace is deleted before the next model is downloaded and loaded. This prevents leftover model files from filling Colab's ephemeral disk when you switch models or GPU-layer configurations.
+
+<Note>
+If you want to reuse a previously downloaded model file to avoid re-downloading it, uncheck **DeleteExistingModels** before playing the cell. The existing file will be loaded directly, saving the download time.
+</Note>

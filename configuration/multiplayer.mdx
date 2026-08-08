@@ -1,5 +1,5 @@
 ---
-title: "Multiplayer Mode: Share Your KoboldCPP Session"
+title: "Multiplayer Mode: Share Your KoboldCPP Colab Session"
 sidebarTitle: "Multiplayer"
 description: "Enable multiplayer mode to share your KoboldCPP Colab session with others. Up to 10 users can connect simultaneously via the same Cloudflare URL."
 ---
@@ -24,7 +24,7 @@ Multiplayer mode lets multiple people connect to the same running KoboldCpp inst
 </Steps>
 
 <Note>
-Up to **10 concurrent users** are supported per session. This limit is set by the `--multiuser 10` flag that the notebook passes to KoboldCpp automatically whenever multiplayer is enabled.
+Every session — with or without the Multiplayer checkbox — supports up to **10 concurrent users** via the `--multiuser 10` flag, which is always active. Enabling the **Multiplayer** checkbox adds the `--multiplayer` flag on top of that, which activates the in-UI multiplayer join flow and session-sharing features.
 </Note>
 
 <Info>

@@ -1,5 +1,5 @@
 ---
-title: "Preset Model Templates for KoboldCPP Colab"
+title: "Quick-Start Preset Templates for KoboldCPP Colab Modded"
 sidebarTitle: "Preset Templates"
 description: "Browse all built-in preset templates for KoboldCPP Colab Modded, from roleplay and instruct to vision, image generation, and corporate use cases."
 ---
@@ -20,9 +20,9 @@ These models are balanced for general-purpose conversation, creative writing, an
 
 | Template Name | Quant | Size (est.) | Context | Notes |
 |---|---|---|---|---|
-| Gemma4 E4B Uncensored (General) | Q5\_K\_M | ~5–6 GB | 16384 | Includes gemma-4-E4B mmproj for vision |
-| Tiefighter 13B (General) | Q4\_K\_S | ~7 GB | 4096 | Includes llama-13b mmproj v1.5 |
-| Estopia 13B (General) | Q4\_K\_S | ~7 GB | 4096 | Includes llama-13b mmproj v1.5 |
+| Gemma4 E4B Uncensored (General) | Q5\_K\_M | ~5–6 GB | 16384 | Includes gemma-4-E4B BF16 mmproj for vision |
+| Tiefighter 13B (General) | Q4\_K\_S | ~7 GB | 4096 | Includes llama-13b v1.5 Q4\_1 mmproj |
+| Estopia 13B (General) | Q4\_K\_S | ~7 GB | 4096 | Includes llama-13b v1.5 Q4\_1 mmproj |
 
 ## Roleplay
 
@@ -32,7 +32,7 @@ These models are fine-tuned for collaborative storytelling, character roleplay, 
 |---|---|---|---|
 | Cydonia 24B (Roleplay) | Q4\_K\_S | 10240 | TheDrummer's Cydonia v4.2 |
 | Broken Tutu 24B (Roleplay) | Q4\_K\_S | 10240 | Roleplay-focused 24B model |
-| Dans PersonalityEngine 24B (Roleplay) | IQ4\_XS | 10240 | PocketDoc's PersonalityEngine V1.2 |
+| Dans PersonalityEngine 24B (Roleplay) | IQ4\_XS | 10240 | PocketDoc's PersonalityEngine V1.2.0 |
 
 ## Instruct
 
@@ -106,8 +106,8 @@ Image model presets load a Stable Diffusion or FLUX model instead of a text mode
 
 | Template Name | Backend | Size (est.) | Notes |
 |---|---|---|---|
-| Z-Image Turbo (Image) | FLUX-based | — | Uses Qwen3-4B clip + FLUX.1 VAE |
-| Flux Klein 4B (Image) | FLUX.2-Klein | — | Uses Qwen3-4B clip + Flux2 VAE |
-| Anything V5 (Image) | Stable Diffusion | 2.13 GB | Anime-style art |
-| Juggernaut XL (Image) | SDXL | 6.94 GB | Photorealistic |
+| Z-Image Turbo (Image) | FLUX-based | — | Uses Qwen3-4B-Instruct-2507 Q4\_K\_S clip + FLUX.1 ae.safetensors VAE |
+| Flux Klein 4B (Image) | FLUX.2-Klein | — | Uses Qwen3-4B Q4\_K\_M clip + flux2vae.safetensors |
+| Anything V5 (Image) | Stable Diffusion | ~2.13 GB | Anime-style art — single safetensors file, no clip or VAE |
+| Juggernaut XL (Image) | SDXL | 6.94 GB | Photorealistic — single safetensors file, no clip or VAE |
 | Krea 2 Turbo (Image) | — | 6.87 GB | ⚠️ **BROKEN** — do not use |

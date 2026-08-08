@@ -1,5 +1,5 @@
 ---
-title: "Troubleshooting KoboldCPP Colab Modded Issues"
+title: "Troubleshooting Common KoboldCPP Colab Modded Issues"
 sidebarTitle: "Troubleshooting"
 description: "Fix common problems with KoboldCPP Colab Modded including no GPU error, Cloudflare tunnel failures, out-of-memory errors, and model download failures."
 ---
@@ -9,10 +9,10 @@ Most issues with KoboldCPP Colab Modded fall into a few common categories: GPU a
 <AccordionGroup>
 
   <Accordion title="⚠️ Colab did not give you a GPU">
-    **Cause:** Colab's free tier enforces GPU usage limits. If you've used a significant amount of GPU compute recently, Colab will decline to allocate a GPU and the notebook will raise an error:
+    **Cause:** Colab's free tier enforces GPU usage limits. If you've used a significant amount of GPU compute recently, Colab will decline to allocate a GPU and the notebook will raise an error similar to:
 
     ```
-    Colab did not give you a GPU due to usage limits
+    ⚠️Colab did not give you a GPU due to usage limits, this can take a few hours before they let you back in.⚠️
     ```
 
     **Solutions:**
@@ -29,7 +29,7 @@ Most issues with KoboldCPP Colab Modded fall into a few common categories: GPU a
 
     - **Be patient.** Model downloads can take several minutes depending on file size and network speed. Wait at least **5 minutes** before concluding something is wrong.
     - **Scroll to the very bottom of the cell output.** The tunnel URL is printed last, after all other startup messages. Scroll past download progress bars and initialization logs.
-    - **Enable MakeLocalTunnelFallback.** If no URL appears after 5 minutes, check the **MakeLocalTunnelFallback** box in the form and re-run the cell. A `loca.lt` URL will appear instead, along with a password to enter in your browser.
+    - **Enable MakeLocalTunnelFallback.** If no URL appears after 5 minutes, check the **MakeLocalTunnelFallback** box in the form and re-run the cell. A `loca.lt` URL will appear in the output along with a password to enter in your browser. The password is printed in the cell output; you can also retrieve it independently from [loca.lt/mytunnelpassword](https://loca.lt/mytunnelpassword).
   </Accordion>
 
   <Accordion title="Out of memory / model fails to load">

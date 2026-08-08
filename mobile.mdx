@@ -1,5 +1,5 @@
 ---
-title: "Using KoboldCPP Colab Modded on Mobile Devices"
+title: "Run KoboldCPP Colab Modded on Your Phone or Tablet"
 sidebarTitle: "Mobile"
 description: "Run KoboldCPP Colab Modded from your phone or tablet by enabling the audio keep-alive cell to prevent session timeouts on mobile browsers."
 ---
@@ -14,7 +14,7 @@ Mobile browsers aggressively throttle background tabs to save battery and memory
     At the top of the notebook, find the cell labelled **"Tap this if you play on Mobile"** and press its play button. The cell starts a silent audio loop designed to keep the browser tab active and prevent the runtime from being throttled or killed by the operating system.
   </Step>
   <Step title="Confirm the audio is playing">
-    Make sure your device's volume is turned on and that the audio is actually playing. Some browsers require a user interaction before allowing audio playback — if the loop does not start automatically, tap the audio element directly. The audio itself is silent, so you will not hear anything, but the playback indicator in your browser tab or status bar confirms it is running.
+    The cell plays a silent audio file, so you will not hear any sound. Some browsers require an explicit user interaction before allowing audio playback — if the loop does not start on its own, tap the audio player control that appears in the cell output to start it manually. A playback indicator in your browser tab or status bar confirms it is running.
   </Step>
   <Step title="Continue with the normal quickstart steps">
     With the keep-alive loop running, proceed exactly as you would on a desktop: select a preset template in the model cell, press play, wait for the model to download and start, then copy the Cloudflare URL from the output and open it to begin your session.

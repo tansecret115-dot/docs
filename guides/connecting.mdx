@@ -38,26 +38,26 @@ The same base URL also exposes a fully OpenAI-compatible REST API at the `/v1/` 
 For example, to send a chat completion request:
 
 ```bash
-curl https://your-tunnel.trycloudflare.com/v1/chat/completions \
+curl https://autumn-pine-3842.trycloudflare.com/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{"model": "koboldcpp", "messages": [{"role": "user", "content": "Hello!"}]}'
 ```
 
-Replace `your-tunnel.trycloudflare.com` with the actual URL from your cell output. The full completions endpoint is:
+Replace `autumn-pine-3842.trycloudflare.com` with the actual URL from your cell output. The full completions endpoint is:
 
 ```
-https://your-tunnel.trycloudflare.com/v1/chat/completions
+https://autumn-pine-3842.trycloudflare.com/v1/chat/completions
 ```
 
 ## LocalTunnel Fallback
 
-If Cloudflare is unavailable or the tunnel fails to connect, you can enable the **MakeLocalTunnelFallback** option in the notebook form. When this is enabled, the notebook uses [localtunnel](https://localtunnel.me/) (`npx localtunnel --port 5001`) as an alternative tunnel provider.
+If Cloudflare is unavailable or the tunnel fails to connect, you can enable the **MakeLocalTunnelFallback** option in the notebook form. When this is enabled, the notebook uses [localtunnel](https://localtunnel.me/) as an alternative tunnel provider.
 
 After enabling MakeLocalTunnelFallback and re-running the cell:
 
 1. A `loca.lt` URL will appear in the cell output.
 2. When you open that URL in your browser, you'll be prompted for a password.
-3. The password is printed in the cell output — look for it just above or alongside the tunnel URL.
+3. The password is retrieved automatically and printed in the cell output. You can also find it at [loca.lt/mytunnelpassword](https://loca.lt/mytunnelpassword) if you need it independently.
 
 <Note>
   Your tunnel URL is public and accessible to anyone who has it. Since it is randomly generated it is effectively private by default, but you should still avoid sharing it if you don't want others accessing your session.

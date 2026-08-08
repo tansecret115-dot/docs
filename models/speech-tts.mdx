@@ -1,7 +1,7 @@
 ---
-title: "Speech Recognition and Text-to-Speech in KoboldCPP"
+title: "Speech Recognition and Text-to-Speech in KoboldCPP Colab"
 sidebarTitle: "Speech & TTS"
-description: "Enable voice input with Whisper speech-to-text and voice output with Kokoro or OuteTTS text-to-speech models in KoboldCPP Colab."
+description: "Enable voice input with Whisper speech-to-text and voice output with Kokoro or OuteTTS text-to-speech in KoboldCPP Colab Modded. Both run GPU-accelerated."
 ---
 
 KoboldCPP supports both speech-to-text (STT) and text-to-speech (TTS) in the same session, letting you interact with your AI model entirely by voice if you want. STT is powered by OpenAI's Whisper and converts your microphone input into text. TTS is powered by Kokoro or OuteTTS and reads the model's responses aloud. You can enable either or both independently, and you can combine them with a text model (and even an image model) in the same run.
@@ -53,11 +53,11 @@ Two TTS engines are supported. Both run GPU-accelerated via the `--ttsgpu` flag,
   <Step title="Optionally add a WavTokenizer (Kokoro only)">
     If you are using Kokoro and want enhanced audio quality, you can optionally set the **WavTokModel** field to the WavTokenizer URL:
 
-    ```
+    ```text
     https://huggingface.co/koboldcpp/tts/resolve/main/WavTokenizer-Large-75-Q4_0.gguf
     ```
 
-    Leave the field empty to use Kokoro without it.
+    When a WavTokenizer is provided, the `--ttswavtokenizer` flag is added to the launch command automatically alongside `--ttsmodel` and `--ttsgpu`. Leave the field empty to use Kokoro without it.
   </Step>
 
   <Step title="Click Play">

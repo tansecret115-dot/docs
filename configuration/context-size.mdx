@@ -1,7 +1,7 @@
 ---
-title: "Setting Context Size in KoboldCPP Colab Modded"
+title: "Setting the Context Size in KoboldCPP Colab Modded"
 sidebarTitle: "Context Size"
-description: "Control how much text KoboldCPP can hold in memory at once. Choose from 4096 to 65536 tokens, or enter a custom value for your use case."
+description: "Control how many tokens KoboldCPP holds in memory. Choose from 4096 to 65536 tokens, or enter a custom value to match your model and use case."
 ---
 
 Context size determines how many tokens — roughly words or subwords — the model can process in a single request. A larger context lets you hold longer conversations, feed in more document text, or write extended stories without the model "forgetting" earlier content. Choosing the right value is a balance between capability and the VRAM available on Colab's GPU.
@@ -36,9 +36,17 @@ Larger context sizes consume significantly more VRAM. If the model fails to load
 ## Recommended Context Sizes by Use Case
 
 | Use Case | Recommended Context |
-|----------|-------------------|
+|----------|---------------------|
 | Short chat / Q&A | 4096 |
 | General use | 8192–16384 |
 | Long documents / stories | 32768–65536 |
 | Vision models (Gemma4) | 16384 |
 | Vision models (Qwen3-VL) | 32768 |
+
+## Deleting Cached Models Between Runs
+
+The notebook includes a **DeleteExistingModels** checkbox (default: **on**). When enabled, it deletes all `*.gguf`, `*.bin`, and `*.ggml` files from the Colab workspace before downloading and starting the new model. This prevents stale model files from filling up Colab's ephemeral disk space when you switch between models or context-size configurations.
+
+<Note>
+If you are repeatedly restarting the same model and want to avoid re-downloading it each time, uncheck **DeleteExistingModels**. The previously downloaded file will be reused, which can save several minutes per restart.
+</Note>

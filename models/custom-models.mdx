@@ -1,7 +1,7 @@
 ---
-title: "Load Any GGUF Model in KoboldCPP Colab"
+title: "Load Any Custom GGUF Model in KoboldCPP Colab Modded"
 sidebarTitle: "Custom Models"
-description: "Override the preset templates and load any GGUF model from HuggingFace by enabling the LoadTextModel checkbox and entering your model URL."
+description: "Override preset templates and load any GGUF model from HuggingFace by enabling the LoadTextModel checkbox and entering a direct download URL."
 ---
 
 While the preset templates cover a wide range of popular models, you are not limited to them. By enabling the `LoadTextModel` checkbox you can point KoboldCPP Colab at any GGUF file hosted on HuggingFace — as long as the URL is a direct download link to the `.gguf` file, the notebook will download and run it automatically. This lets you experiment with any quantisation, any model family, or any fine-tune that has been exported to the GGUF format.
@@ -20,7 +20,7 @@ While the preset templates cover a wide range of popular models, you are not lim
   <Step title="Paste a HuggingFace direct GGUF URL into the Model field">
     Replace the default URL in the **Model** field with a direct link to your chosen `.gguf` file. The URL must point to the raw file — use the `resolve/main/` URL pattern:
 
-    ```
+    ```text
     https://huggingface.co/KoboldAI/LLaMA2-13B-Tiefighter-GGUF/resolve/main/LLaMA2-13B-Tiefighter.Q4_K_M.gguf
     ```
 
@@ -68,7 +68,7 @@ Most popular models have community GGUF conversions on HuggingFace, often upload
 4. Click the **copy link** icon next to the file, or click the filename and copy the URL from your browser, then replace `/blob/main/` with `/resolve/main/` so the link becomes a direct download.
 
 **Example pattern:**
-```
+```text
 https://huggingface.co/<author>/<repo>/resolve/main/<filename>.gguf
 ```
 

@@ -1,7 +1,7 @@
 ---
-title: "Vision and Multimodal Models in KoboldCPP Colab"
+title: "Vision and Multimodal Models in KoboldCPP Colab Modded"
 sidebarTitle: "Vision Models"
-description: "Add image understanding to your text model by loading a vision multimodal projector (mmproj) file alongside your GGUF language model."
+description: "Add image understanding to your text model by loading a vision multimodal projector (mmproj) file alongside your GGUF language model in KoboldCPP Colab."
 ---
 
 Vision models in KoboldCPP require two separate files working together: a base text model (the GGUF language model) and a multimodal projector — commonly called an **mmproj** — that connects an image encoder to the language model. The mmproj translates visual features extracted from an image into token embeddings that the LLM can understand and reason about. Without a matching mmproj, your text model cannot process images at all.
@@ -19,6 +19,7 @@ Each mmproj is designed to pair with a specific model family. Using a mismatched
 | gemma-4-E4B mmproj | BF16 | Gemma 4 E4B family |
 | Qwen3-VL-8B mmproj | BF16 | Qwen3-VL-8B-Instruct and Qwen3.6-35B-A3B |
 | llama-13b mmproj v1.5 | Q4\_1 | LLaMA 2 13B models (Tiefighter, Estopia) |
+| llama-7b mmproj v1.5 | Q4\_0 | LLaMA 1/2 7B models |
 | mistral-7b mmproj v1.5 | Q4\_1 | Mistral 7B models |
 | LLaMA3-8B mmproj | Q4\_1 | LLaMA 3 8B models |
 
@@ -55,7 +56,7 @@ The **Mmproj** field accepts any direct URL in addition to the built-in dropdown
 3. Paste it into the **Mmproj** field.
 4. Make sure **LoadVisionMMProjector** is checked.
 
-```
+```text
 https://huggingface.co/<author>/<repo>/resolve/main/mmproj-BF16.gguf
 ```
 
