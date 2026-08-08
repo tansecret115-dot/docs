@@ -1,0 +1,88 @@
+{
+  "projectType": "ai-ml",
+  "projectName": "KoboldCPP Colab Modded",
+  "projectDescription": "A modded Google Colab notebook that lets you run KoboldCpp — a local LLM inference engine — in the cloud with GPU acceleration, supporting text, vision, image generation, speech, TTS, music, and embeddings models.",
+  "theme": "almond",
+  "primaryColor": "#7C3AED",
+  "lightColor": "#EDE9FE",
+  "darkColor": "#4C1D95",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "mobile"
+            ]
+          },
+          {
+            "group": "Models",
+            "pages": [
+              "models/preset-templates",
+              "models/custom-models",
+              "models/image-models",
+              "models/vision-models",
+              "models/speech-tts",
+              "models/music-models",
+              "models/embeddings"
+            ]
+          },
+          {
+            "group": "Configuration",
+            "pages": [
+              "configuration/context-size",
+              "configuration/gpu-layers",
+              "configuration/multiplayer",
+              "configuration/google-drive"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/connecting",
+              "guides/switching-models",
+              "guides/l4-notebook",
+              "guides/troubleshooting"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "One-click GPU-accelerated LLM inference in Google Colab",
+    "Preset model templates for general, roleplay, instruct, corporate, and image use cases",
+    "Custom GGUF model loading via HuggingFace URLs",
+    "Vision/multimodal model support with mmproj files",
+    "Image generation (Stable Diffusion, FLUX) via sd.cpp backend",
+    "Speech recognition (Whisper) and text-to-speech (Kokoro/OuteTTS) support",
+    "Music generation (AceStep) support",
+    "Embeddings model support",
+    "Cloudflare tunnel for remote access to the KoboldCpp API",
+    "Multiplayer session sharing",
+    "Google Drive save/load integration",
+    "Mobile keep-alive audio cell to prevent session timeout"
+  ],
+  "publicApiSurface": [
+    "Template dropdown — preset model selector",
+    "LoadTextModel checkbox — enables text LLM loading",
+    "Model URL field — custom GGUF model from HuggingFace",
+    "LoadVisionMMProjector checkbox + Mmproj URL — vision multimodal projector",
+    "LoadImgModel checkbox + ImgModel/ImgClip1/ImgVAE — image generation model",
+    "LoadSpeechModel checkbox + SpeechModel URL — Whisper speech-to-text",
+    "LoadTTSModel checkbox + TTSModel/WavTokModel URLs — text-to-speech",
+    "LoadEmbeddingsModel checkbox + EmbeddingsModel URL — embeddings",
+    "LoadMusicModel / LoadFastMusicModel / LoadMusicXLModel checkboxes — music generation",
+    "Layers dropdown — GPU layer count (Auto or 999)",
+    "ContextSize dropdown — context window size (4096–65536 tokens)",
+    "Multiplayer checkbox — enable multiplayer session sharing",
+    "AllowSaveToGoogleDrive checkbox — Google Drive story persistence",
+    "MakeLocalTunnelFallback checkbox — localtunnel fallback when Cloudflare fails",
+    "DeleteExistingModels checkbox — clears cached GGUF files on restart",
+    "Cloudflare remotetunnel — public HTTPS URL to KoboldCpp web UI and API"
+  ]
+}

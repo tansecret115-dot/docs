@@ -1,0 +1,64 @@
+---
+title: "Vision and Multimodal Models in KoboldCPP Colab"
+sidebarTitle: "Vision Models"
+description: "Add image understanding to your text model by loading a vision multimodal projector (mmproj) file alongside your GGUF language model."
+---
+
+Vision models in KoboldCPP require two separate files working together: a base text model (the GGUF language model) and a multimodal projector — commonly called an **mmproj** — that connects an image encoder to the language model. The mmproj translates visual features extracted from an image into token embeddings that the LLM can understand and reason about. Without a matching mmproj, your text model cannot process images at all.
+
+<Info>
+  Named presets that include vision capability — such as **Gemma4 E4B Uncensored (General)** and **Qwen3 VL 8B (Vision)** — load the correct mmproj automatically. You do not need to enable `LoadVisionMMProjector` or configure the `Mmproj` field manually when using those presets.
+</Info>
+
+## Available mmproj files
+
+Each mmproj is designed to pair with a specific model family. Using a mismatched mmproj will produce garbled or nonsensical vision outputs.
+
+| mmproj File | Quantisation | Compatible Models |
+|---|---|---|
+| gemma-4-E4B mmproj | BF16 | Gemma 4 E4B family |
+| Qwen3-VL-8B mmproj | BF16 | Qwen3-VL-8B-Instruct and Qwen3.6-35B-A3B |
+| llama-13b mmproj v1.5 | Q4\_1 | LLaMA 2 13B models (Tiefighter, Estopia) |
+| mistral-7b mmproj v1.5 | Q4\_1 | Mistral 7B models |
+| LLaMA3-8B mmproj | Q4\_1 | LLaMA 3 8B models |
+
+<Note>
+  BF16 mmproj files are higher fidelity but use more VRAM than Q4\_1 versions. On Colab's free T4 (15 GB VRAM) both formats are typically fine as long as your base model is not itself already near the VRAM limit.
+</Note>
+
+## Steps to enable vision manually
+
+<Steps>
+  <Step title="Check LoadVisionMMProjector">
+    Tick the **LoadVisionMMProjector** checkbox in the notebook form.
+  </Step>
+
+  <Step title="Select a matching mmproj from the dropdown">
+    Pick the mmproj that corresponds to your text model's architecture from the **Mmproj** dropdown. Refer to the compatibility table above. You can also paste a custom mmproj URL directly into the field.
+  </Step>
+
+  <Step title="Also check LoadTextModel and select a compatible base model">
+    The mmproj is useless without a base language model to attach to. Tick **LoadTextModel** as well and select (or paste the URL of) the matching GGUF model in the **Model** field.
+  </Step>
+
+  <Step title="Click Play">
+    Run the cell. KoboldCPP will download both files, link the mmproj to the base model, and serve a Cloudflare URL. In the KoboldCPP interface you can then attach images to your prompts.
+  </Step>
+</Steps>
+
+## Using a custom mmproj URL
+
+The **Mmproj** field accepts any direct URL in addition to the built-in dropdown options. If you want to use an mmproj not listed in the dropdown:
+
+1. Find the mmproj `.gguf` file on HuggingFace (usually published alongside the main model).
+2. Copy the `resolve/main/` direct download URL.
+3. Paste it into the **Mmproj** field.
+4. Make sure **LoadVisionMMProjector** is checked.
+
+```
+https://huggingface.co/<author>/<repo>/resolve/main/mmproj-BF16.gguf
+```
+
+<Tip>
+  The **Qwen3 VL 8B (Vision)** template is the easiest way to try vision capabilities without any manual configuration — it loads the Qwen3-VL-8B-Instruct model at Q6\_K with 32768 context and the matching BF16 mmproj in one click.
+</Tip>

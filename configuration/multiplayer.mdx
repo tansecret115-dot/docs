@@ -1,0 +1,36 @@
+---
+title: "Multiplayer Mode: Share Your KoboldCPP Session"
+sidebarTitle: "Multiplayer"
+description: "Enable multiplayer mode to share your KoboldCPP Colab session with others. Up to 10 users can connect simultaneously via the same Cloudflare URL."
+---
+
+Multiplayer mode lets multiple people connect to the same running KoboldCpp instance at the same time. This is ideal for collaborative story writing, shared roleplay sessions, or simply letting a friend interact with the same model you are running — all without either person needing their own GPU or Colab account.
+
+## How to Enable Multiplayer
+
+<Steps>
+  <Step title="Check the Multiplayer checkbox">
+    In the notebook's form cell, tick the **Multiplayer** checkbox. This adds the `--multiplayer` flag to the KoboldCpp launch command.
+  </Step>
+  <Step title="Play the cell">
+    Click the play button on the form cell. KoboldCpp will start and the Cloudflare tunnel URL will appear in the cell output once the server is ready.
+  </Step>
+  <Step title="Share the URL">
+    Copy the Cloudflare URL from the output and send it to anyone you want to invite. They do not need a Google account or a Colab session.
+  </Step>
+  <Step title="Guests join the session">
+    When your guests open the URL in their browser, they will see the KoboldCpp web UI. They can click **Join Multiplayer** to participate in the shared session.
+  </Step>
+</Steps>
+
+<Note>
+Up to **10 concurrent users** are supported per session. This limit is set by the `--multiuser 10` flag that the notebook passes to KoboldCpp automatically whenever multiplayer is enabled.
+</Note>
+
+<Info>
+All users share the same model context — everyone sees the same conversation history and session state. There is no private channel within a multiplayer session.
+</Info>
+
+<Tip>
+The same Cloudflare URL serves as both the host link and the guest link. You can open it in your own browser just as a guest would, which is handy for testing the connection before sharing it.
+</Tip>

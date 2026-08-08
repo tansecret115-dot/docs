@@ -1,0 +1,82 @@
+---
+title: "Image Generation Models in KoboldCPP Colab"
+sidebarTitle: "Image Models"
+description: "Enable image generation in KoboldCPP Colab by loading Stable Diffusion or FLUX models. Use presets like Z-Image Turbo, Flux Klein, or Juggernaut XL."
+---
+
+KoboldCPP supports image generation through an embedded version of [sd.cpp](https://github.com/leejet/stable-diffusion.cpp), a CPU/GPU inference engine for Stable Diffusion and FLUX models. Enabling the `LoadImgModel` checkbox adds an image generation interface to your KoboldCPP session alongside the standard chat UI — no separate tool required. You can even combine image generation with a text model by ticking both `LoadTextModel` and `LoadImgModel` at the same time.
+
+## Available image model presets
+
+<CardGroup cols={2}>
+  <Card title="Z-Image Turbo" icon="bolt">
+    **Backend:** FLUX-based  
+    **Clip:** Qwen3-4B-Instruct-2507 (Q4\_K\_S)  
+    **VAE:** FLUX.1-dev ae.safetensors  
+
+    A fast FLUX-architecture image model. Uses a Qwen3-4B text encoder as its CLIP replacement and the standard FLUX.1 VAE for decoding.
+  </Card>
+
+  <Card title="Flux Klein 4B" icon="image">
+    **Backend:** FLUX.2-Klein  
+    **Clip:** Qwen3-4B (Q4\_K\_M)  
+    **VAE:** flux2vae.safetensors  
+
+    FLUX.2-Klein is a compact FLUX model. Uses the Qwen3-4B text encoder and a dedicated Flux2 VAE.
+  </Card>
+
+  <Card title="Anything V5" icon="palette">
+    **Backend:** Stable Diffusion  
+    **Size:** ~2.13 GB  
+
+    Anime-style Stable Diffusion model in safetensors format. No separate clip or VAE required — loads as a single file.
+  </Card>
+
+  <Card title="Juggernaut XL" icon="camera">
+    **Backend:** SDXL  
+    **Size:** ~6.94 GB  
+
+    A photorealistic SDXL model. Produces highly detailed, realistic images. Requires more VRAM than SD 1.5 models.
+  </Card>
+</CardGroup>
+
+<Warning>
+  **Krea 2 Turbo** is listed in the notebook's Template dropdown but is currently **BROKEN**. Do not use it — it will not produce valid images. Use one of the other image presets above instead.
+</Warning>
+
+## Steps to enable image generation
+
+<Steps>
+  <Step title="Check LoadImgModel">
+    In the notebook form, tick the **LoadImgModel** checkbox. This activates image generation mode.
+  </Step>
+
+  <Step title="Select an image model">
+    Choose a preset from the **ImgModel** dropdown, or paste a direct URL to a `.gguf` or `.safetensors` image model file into the field.
+  </Step>
+
+  <Step title="Set ImgClip1 and ImgVAE for FLUX models (optional)">
+    FLUX-based models (Z-Image Turbo, Flux Klein) require a text encoder (`ImgClip1`) and a VAE (`ImgVAE`). If you use one of these presets via the **Template** dropdown, both fields are filled automatically. If you load a FLUX model manually via the checkbox path, you must paste the clip and VAE URLs yourself.
+
+    Stable Diffusion and SDXL models (Anything V5, Juggernaut XL) do not require separate clip or VAE files.
+  </Step>
+
+  <Step title="Click Play">
+    Run the cell. KoboldCPP will download and load the image model, then print a Cloudflare URL. Open it in your browser to access the image generation interface.
+  </Step>
+</Steps>
+
+## Flags set automatically
+
+When `LoadImgModel` is active, the following sd.cpp flags are appended to the launch command automatically — you do not need to configure these yourself:
+
+| Flag | Value | Effect |
+|---|---|---|
+| `--sdthreads` | `4` | Number of CPU threads for SD operations |
+| `--sdquant` | — | Enables quantisation to reduce VRAM |
+| `--sdclamped` | `768` | Clamps output resolution to 768 px max |
+| `--sdclipgpu` | — | Runs the CLIP text encoder on GPU |
+
+<Tip>
+  You can combine image generation with a text model. Tick both **LoadTextModel** and **LoadImgModel**, choose your models, and KoboldCPP will serve both capabilities from the same Cloudflare URL. Keep in mind that running two models simultaneously uses more VRAM — prefer smaller text models (7B–13B) when combining with an image model on Colab's free T4.
+</Tip>

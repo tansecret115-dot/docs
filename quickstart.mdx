@@ -1,47 +1,60 @@
 ---
-title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+title: "Get Started with KoboldCPP Colab Modded in 2 Minutes"
+sidebarTitle: "Quickstart"
+description: "Open the KoboldCPP Colab notebook, choose a model preset, press play twice, and connect to your AI via the Cloudflare URL in under 2 minutes."
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
-
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
-
-## Prerequisites
-
-Before you begin, you must have:
-
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
-
-## Get started
+Getting started with KoboldCPP Colab Modded takes just a few clicks. You open the notebook in Google Colab, select a model preset from the dropdown, press play, and within minutes you have a fully running AI accessible through a Cloudflare tunnel URL — no installation, no configuration files, and no local GPU required.
 
 <Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
+  <Step title="Open the notebook in Google Colab">
+    Click the link below to open the KoboldCPP Colab Modded notebook directly in your browser. Sign in with your Google account if you are not already signed in.
 
-    ```bash
-    npm install your-package
-    ```
+    [**Open colab.ipynb in Google Colab →**](https://colab.research.google.com/github/tansecret115-dot/KoboldCPP-Colab-Modded/blob/main/colab.ipynb)
   </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
-
-    ```bash
-    your-cli init
-    ```
+  <Step title="Run the keep-alive cell (mobile only)">
+    If you are on a phone or tablet, run the first cell labelled **"Tap this if you play on Mobile"**. It plays a silent audio loop that prevents your mobile browser from throttling the background tab and shutting down the session. Desktop users can skip this step.
   </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
+  <Step title="Choose a model preset">
+    In the second cell, find the **Template** dropdown and select a preset. Each named template auto-configures the optimal context size, quantization, and launch flags for that model.
 
-    ```bash
-    your-cli start
+    The default template is:
+
+    > **GLM-4.7-Flash-REAP** — MoE architecture, 23B-A3B parameters, Q3\_K\_S quantization, 10.3 GB
+
+    You can also switch to **Manual** in the dropdown to provide your own model URL, context size, and other settings.
+  </Step>
+  <Step title="Click play and wait for the model to load">
+    Press the **play button** (▶) on the model cell. Colab will allocate a GPU, install dependencies, download the model weights, and start the KoboldCpp server. Progress messages appear in the cell output as each step completes. Download time varies by model size and Colab's current network speed — most presets are ready in one to three minutes.
+  </Step>
+  <Step title="Copy the Cloudflare URL and connect">
+    When startup is complete, a line like the following appears at the bottom of the cell output:
+
     ```
+    https://your-unique-id.trycloudflare.com
+    ```
+
+    Copy that URL and open it in your browser. You can also paste it into any KoboldCpp-compatible front-end app. Your AI session is live.
   </Step>
 </Steps>
 
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
+<Info>
+  Named preset templates automatically configure optimal context size, quantization level, and KoboldCpp launch flags for that specific model. You do not need to adjust any settings manually when using a preset.
+</Info>
 
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
-</Tip>
+<Warning>
+  Google Colab provides a limited amount of free GPU time per day. Keep the Colab tab open and active for your entire session — closing it may terminate the runtime. Respond to any captcha prompts that Colab displays to confirm you are still present, or the session may be interrupted.
+</Warning>
+
+## Popular preset templates
+
+The table below lists some of the most commonly used presets to help you pick a starting point. See [Preset Templates](/models/preset-templates) for the full list.
+
+| Template Name | Category | Size |
+|---|---|---|
+| GLM-4.7-Flash-REAP | MoE (23B-A3B), Q3\_K\_S | 10.3 GB |
+| Gemma4 E4B Uncensored | General, Q5\_K\_M | ~4B |
+| Cydonia 24B | Roleplay, Q4\_K\_S | 24B |
+| Qwen3 VL 8B | Vision, Q6\_K | 8B |
+| Z-Image Turbo | Image | — |
+| Mistral Small 24B | Corporate, Q4\_K\_S | 24B |

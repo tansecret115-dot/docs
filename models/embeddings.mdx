@@ -1,0 +1,53 @@
+---
+title: "Embeddings Models in KoboldCPP Colab"
+sidebarTitle: "Embeddings"
+description: "Enable text embeddings in KoboldCPP Colab to generate vector representations of text using the snowflake-arctic-embed-s model."
+---
+
+Text embeddings turn a piece of text into a dense numerical vector that captures its semantic meaning. These vectors are the foundation of semantic search, retrieval-augmented generation (RAG) pipelines, document clustering, and similarity scoring tasks. KoboldCPP exposes an OpenAI-compatible embeddings endpoint, so any tool that works with the OpenAI embeddings API can be pointed at your KoboldCPP Colab session without code changes.
+
+<Note>
+  Embeddings can be loaded alongside a text model (and other model types) in the same session. Tick both `LoadEmbeddingsModel` and `LoadTextModel` to serve both generation and embeddings from a single Cloudflare URL.
+</Note>
+
+## Steps to enable embeddings
+
+<Steps>
+  <Step title="Check LoadEmbeddingsModel">
+    Tick the **LoadEmbeddingsModel** checkbox in the notebook form.
+  </Step>
+
+  <Step title="Choose your embeddings model">
+    The default model is **snowflake-arctic-embed-s Q4\_0**, a small and efficient sentence embedding model well suited to Colab's GPU environment.
+
+    | Model | Quantisation | Source |
+    |---|---|---|
+    | snowflake-arctic-embed-s | Q4\_0 | [yixuan-chia/snowflake-arctic-embed-s-GGUF](https://huggingface.co/yixuan-chia/snowflake-arctic-embed-s-GGUF) |
+
+    If you need a different embeddings model, paste its direct GGUF URL into the **EmbeddingsModel** field. Any GGUF-format embeddings model compatible with llama.cpp should work.
+  </Step>
+
+  <Step title="Click Play">
+    Run the cell. KoboldCPP loads the embeddings model and registers it on the embeddings endpoint.
+  </Step>
+
+  <Step title="Call the embeddings endpoint">
+    Once your Cloudflare URL is live, you can call the embeddings endpoint using the OpenAI-compatible API:
+
+    ```http
+    POST https://<your-cloudflare-url>/v1/embeddings
+    Content-Type: application/json
+
+    {
+      "model": "snowflake-arctic-embed-s",
+      "input": "The quick brown fox jumps over the lazy dog"
+    }
+    ```
+
+    The response follows the standard OpenAI embeddings format, returning a `data` array with an `embedding` float array for each input string.
+  </Step>
+</Steps>
+
+<Tip>
+  For RAG workflows, you can combine the embeddings model with a text model in the same session: tick both `LoadEmbeddingsModel` and `LoadTextModel`, select your models, then click Play. Your Cloudflare URL will serve both the `/v1/embeddings` endpoint and the `/v1/chat/completions` endpoint simultaneously.
+</Tip>

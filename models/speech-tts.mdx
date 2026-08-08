@@ -1,0 +1,70 @@
+---
+title: "Speech Recognition and Text-to-Speech in KoboldCPP"
+sidebarTitle: "Speech & TTS"
+description: "Enable voice input with Whisper speech-to-text and voice output with Kokoro or OuteTTS text-to-speech models in KoboldCPP Colab."
+---
+
+KoboldCPP supports both speech-to-text (STT) and text-to-speech (TTS) in the same session, letting you interact with your AI model entirely by voice if you want. STT is powered by OpenAI's Whisper and converts your microphone input into text. TTS is powered by Kokoro or OuteTTS and reads the model's responses aloud. You can enable either or both independently, and you can combine them with a text model (and even an image model) in the same run.
+
+<Tip>
+  You can load speech recognition, TTS, **and** a text model all at once by ticking all three checkboxes (`LoadSpeechModel`, `LoadTTSModel`, `LoadTextModel`) before clicking Play. KoboldCPP handles all three in a single process.
+</Tip>
+
+## Speech recognition (Whisper STT)
+
+KoboldCPP uses [Whisper](https://github.com/openai/whisper) for speech-to-text. When enabled, a microphone button appears in the KoboldCPP chat UI — press it to speak, and your words are transcribed and sent as your prompt.
+
+<Steps>
+  <Step title="Check LoadSpeechModel">
+    Tick the **LoadSpeechModel** checkbox in the notebook form.
+  </Step>
+
+  <Step title="Choose your Whisper model">
+    The default model is **whisper-base.en** (q5\_1 quantisation), which is fast and accurate for English speech. You can paste a custom Whisper model URL into the **SpeechModel** field if you need a different language or a larger/smaller variant.
+
+    | Model | Quantisation | Notes |
+    |---|---|---|
+    | whisper-base.en | q5\_1 | Default — English only, fast |
+  </Step>
+
+  <Step title="Click Play">
+    Run the cell. Whisper loads alongside your other selected models. A microphone icon appears in the KoboldCPP interface once the Cloudflare URL is open in your browser.
+  </Step>
+</Steps>
+
+## Text-to-speech (Kokoro / OuteTTS)
+
+Two TTS engines are supported. Both run GPU-accelerated via the `--ttsgpu` flag, which is set automatically.
+
+<Steps>
+  <Step title="Check LoadTTSModel">
+    Tick the **LoadTTSModel** checkbox in the notebook form.
+  </Step>
+
+  <Step title="Choose your TTS model">
+    Select from the **TTSModel** dropdown:
+
+    | Model | Notes |
+    |---|---|
+    | Kokoro\_no\_espeak\_Q4 | **Default.** Kokoro TTS without an espeak dependency — works on Colab out of the box |
+    | OuteTTS-0.2-500M-Q4\_0 | Alternative TTS engine — 500M parameter model |
+  </Step>
+
+  <Step title="Optionally add a WavTokenizer (Kokoro only)">
+    If you are using Kokoro and want enhanced audio quality, you can optionally set the **WavTokModel** field to the WavTokenizer URL:
+
+    ```
+    https://huggingface.co/koboldcpp/tts/resolve/main/WavTokenizer-Large-75-Q4_0.gguf
+    ```
+
+    Leave the field empty to use Kokoro without it.
+  </Step>
+
+  <Step title="Click Play">
+    Run the cell. TTS output plays directly in the KoboldCPP interface. The `--ttsgpu` flag is applied automatically so inference runs on the GPU rather than the CPU.
+  </Step>
+</Steps>
+
+<Note>
+  The `--ttsgpu` flag is always added when `LoadTTSModel` is enabled. You do not need to set this manually.
+</Note>

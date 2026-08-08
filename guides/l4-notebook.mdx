@@ -1,0 +1,55 @@
+---
+title: "Using the L4 GPU Notebook for Larger Models"
+sidebarTitle: "L4 Notebook"
+description: "Use the colabL4.ipynb notebook to access Colab's L4 GPU runtime, which provides more VRAM for running larger models and higher context sizes."
+---
+
+The L4 notebook (`colabL4.ipynb`) is configured for Google Colab's L4 GPU runtime, which provides significantly more VRAM than the default T4. This makes it the right choice when you want to load large 24B+ parameter models at higher quality quantizations, push to longer context windows without running out of memory, or simply get more headroom for demanding inference workloads.
+
+## Opening the L4 Notebook
+
+Open the L4 notebook directly using the link below:
+
+**[Open colabL4.ipynb in Google Colab](https://colab.research.google.com/github/tansecret115-dot/KoboldCPP-Colab-Modded/blob/main/colabL4.ipynb)**
+
+## Setting Up the L4 Runtime
+
+<Steps>
+  <Step title="Open the L4 notebook">
+    Click the link above to open `colabL4.ipynb` in Google Colab.
+  </Step>
+  <Step title="Change the runtime type">
+    In Google Colab, go to **Runtime → Change runtime type** in the top menu.
+  </Step>
+  <Step title="Select the L4 GPU">
+    In the hardware accelerator dropdown, select **L4**. Then click **Save**.
+  </Step>
+  <Step title="Proceed as normal">
+    Fill in the notebook form with your model settings and click play, just as you would with the standard notebook. Everything else — form fields, features, and the Cloudflare tunnel — works identically.
+  </Step>
+</Steps>
+
+<Info>
+  The L4 GPU is a paid resource. It requires a **Colab Pro** or **Colab Pro+** subscription and is not available on Colab's free tier. If you don't see L4 as an option, your current plan does not include it.
+</Info>
+
+## T4 vs. L4 at a Glance
+
+| GPU | VRAM | Best For |
+|-----|------|----------|
+| T4  | 16 GB | Models up to ~13B at Q4 quantization; standard context sizes |
+| L4  | 24 GB | 24B models at Q4, larger contexts on smaller models, higher-quality quants |
+
+The extra VRAM on the L4 lets you:
+
+- Load 24B parameter models at Q4 quantization without compromise
+- Run 7B–13B models at Q6 or Q8 quantization for better output quality
+- Use larger context sizes (e.g., 8K–16K) without exhausting GPU memory
+
+<Tip>
+  For most users, the standard notebook on a T4 GPU is sufficient. Use the L4 notebook only when you have a specific need for larger models or longer contexts — and keep in mind it consumes Colab Pro compute credits faster.
+</Tip>
+
+## Feature Parity
+
+The L4 notebook and the standard notebook are functionally identical. All form fields, settings, features, and behaviors are the same. The only difference is the target GPU runtime. Any workflow or configuration that works in the standard notebook works unchanged in the L4 notebook.

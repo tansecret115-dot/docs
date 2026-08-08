@@ -1,0 +1,37 @@
+---
+title: "GPU Layer Offloading in KoboldCPP Colab Modded"
+sidebarTitle: "GPU Layers"
+description: "Configure how many model layers run on the GPU versus CPU. Use Auto for optimal performance, or set 999 to force all layers onto the GPU."
+---
+
+KoboldCpp splits a model's layers between the GPU and CPU when loading. Layers running on the GPU are processed much faster, but each one consumes VRAM. Layers that overflow onto the CPU are slower but use system RAM instead. Getting the balance right lets you run larger models without crashing while still getting good inference speed.
+
+## Options
+
+### Auto (default)
+
+When you select **Auto**, KoboldCpp internally uses `-1` for the layer count, which tells it to probe the available VRAM and automatically offload as many layers as will fit. This is the recommended choice for most users because it adapts to whatever GPU Colab assigns to your session.
+
+### 999 — Force All Layers to GPU
+
+Setting **Layers** to `999` instructs KoboldCpp to push every layer of the model onto the GPU. When it works, this gives you the fastest possible inference because no CPU fallback is needed.
+
+<Warning>
+Setting 999 on a very large model may exceed Colab's GPU VRAM limit and crash your session. If you see an out-of-memory error, switch back to **Auto** or enter a smaller explicit layer count.
+</Warning>
+
+### Custom Value
+
+You can type any positive integer into the **Layers** field. KoboldCpp will offload exactly that many layers to the GPU and run the remainder on the CPU. This is useful when you know your model's architecture and want precise control.
+
+## How to Set GPU Layers
+
+Find the **Layers** dropdown in the notebook's form cell, choose **Auto**, **999**, or type a custom integer, then play the cell to apply it.
+
+<Tip>
+If you are using a preset template, leave **Layers** on **Auto**. Each preset is already tuned for Colab's GPU, and Auto will select the correct offload automatically.
+</Tip>
+
+## Flash Attention
+
+Flash attention is always enabled for every session via the `--flashattention` flag. This optimisation reduces the VRAM cost of the attention mechanism, which effectively gives you a bit more headroom for layers or a larger context size — no configuration needed on your end.

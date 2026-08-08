@@ -1,0 +1,113 @@
+---
+title: "Preset Model Templates for KoboldCPP Colab"
+sidebarTitle: "Preset Templates"
+description: "Browse all built-in preset templates for KoboldCPP Colab Modded, from roleplay and instruct to vision, image generation, and corporate use cases."
+---
+
+Preset templates are the fastest way to get started with KoboldCPP Colab Modded. Each template automatically configures the correct model URL, context size, quantization format, and multimodal projector (mmproj) file when one is needed — you do not need to touch any other setting. Simply select a template from the **Template** dropdown at the top of the notebook cell and click the play button to launch.
+
+<Info>
+  Named preset templates are active **only when no loader checkbox is ticked**. If you enable `LoadTextModel`, `LoadImgModel`, `LoadVisionMMProjector`, or any other loader checkbox, those manual selections override the chosen template completely.
+</Info>
+
+<Tip>
+  The template selected by default when you first open the notebook is **GLM-4.7-Flash-REAP (MoE, 23B-A3B, Q3\_K\_S, 10.3GB)** — a fast mixture-of-experts model that fits comfortably within Colab's free-tier VRAM.
+</Tip>
+
+## General
+
+These models are balanced for general-purpose conversation, creative writing, and everyday tasks.
+
+| Template Name | Quant | Size (est.) | Context | Notes |
+|---|---|---|---|---|
+| Gemma4 E4B Uncensored (General) | Q5\_K\_M | ~5–6 GB | 16384 | Includes gemma-4-E4B mmproj for vision |
+| Tiefighter 13B (General) | Q4\_K\_S | ~7 GB | 4096 | Includes llama-13b mmproj v1.5 |
+| Estopia 13B (General) | Q4\_K\_S | ~7 GB | 4096 | Includes llama-13b mmproj v1.5 |
+
+## Roleplay
+
+These models are fine-tuned for collaborative storytelling, character roleplay, and adult fiction.
+
+| Template Name | Quant | Context | Notes |
+|---|---|---|---|
+| Cydonia 24B (Roleplay) | Q4\_K\_S | 10240 | TheDrummer's Cydonia v4.2 |
+| Broken Tutu 24B (Roleplay) | Q4\_K\_S | 10240 | Roleplay-focused 24B model |
+| Dans PersonalityEngine 24B (Roleplay) | IQ4\_XS | 10240 | PocketDoc's PersonalityEngine V1.2 |
+
+## Instruct
+
+Instruction-following models suitable for coding assistance, summarisation, and structured tasks.
+
+| Template Name | Quant | Context | Notes |
+|---|---|---|---|
+| Harbinger 24B (Instruct) | Q4\_K\_S | 10240 | LatitudeGames Harbinger |
+| Muse 12B (Instruct) | Q4\_K\_S | 49152 | LatitudeGames Muse — very large context |
+
+## Corporate
+
+Clean, policy-friendly models suited to professional and business use cases.
+
+| Template Name | Quant | Context | Notes |
+|---|---|---|---|
+| Mistral Small 24B (Corporate) | Q4\_K\_S | 10240 | Mistral-Small-3.2-24B-Instruct-2506 |
+| GPT OSS 20B (Corporate) | mxfp4 | 32768 | OpenAI's open-source GPT model |
+| Gemma3 12B (Corporate) | Q4\_K\_M | 16384 | Google Gemma 3 12B IT |
+| GLM4 9b chat (Corporate) | Q6\_K | 49152 | THUDM GLM-4-9B-0414 — huge context |
+
+## Large / Mixture-of-Experts
+
+These models use MoE architecture or are simply large, offering higher capability at the cost of slightly more VRAM or slower inference. Most still fit within Colab's free T4 GPU.
+
+<AccordionGroup>
+  <Accordion title="GLM-4.7-Flash (30B, Q2_K, 11.3 GB)">
+    **Context:** 6144 · **Quant:** Q2\_K · **Architecture:** MoE (30B-A3B)
+
+    THUDM's GLM-4.7-Flash model in a highly compressed Q2\_K quantisation. Fast responses with a moderate context window.
+  </Accordion>
+
+  <Accordion title="GLM-4.7-Flash-REAP (MoE, 23B-A3B, Q3_K_S, 10.3 GB) — Default">
+    **Context:** 10240 · **Quant:** Q3\_K\_S · **Architecture:** MoE (23B-A3B)
+
+    The REAP variant of GLM-4.7-Flash. This is the **default selected template** when you open the notebook. Better quality than the base Q2\_K version while still fitting in free-tier VRAM.
+  </Accordion>
+
+  <Accordion title="Gemma4 12B (Q4_K_M, 7.12 GB)">
+    **Context:** 16384 · **Quant:** Q4\_K\_M
+
+    Google's Gemma 4 12B in a well-balanced Q4\_K\_M quantisation. Good quality-to-size ratio for a dense 12B model.
+  </Accordion>
+
+  <Accordion title="Magistral Small 2509 (24B, Q2_K_L, 9.05 GB)">
+    **Context:** 10240 · **Quant:** Q2\_K\_L
+
+    Mistral's Magistral Small model — capable reasoning and instruction following from a 24B base compressed to ~9 GB.
+  </Accordion>
+
+  <Accordion title="Qwen3.6-35B-A3B (MoE, IQ2_XXS, 9.5 GB)">
+    **Context:** 10240 · **Quant:** IQ2\_XXS · **Architecture:** MoE (35B-A3B) · **Vision:** Includes mmproj
+
+    A vision-capable mixture-of-experts model. The mmproj file (~900 MB) is loaded automatically alongside the base model.
+  </Accordion>
+</AccordionGroup>
+
+## Instruct (Misc)
+
+Smaller or experimental instruct models worth trying.
+
+| Template Name | Quant | Size | Context | Notes |
+|---|---|---|---|---|
+| Kai 30B Instruct | IQ2\_XXS | 9.31 GB | 6144 | Dense 30B compressed aggressively |
+| Supra1.5 50M Instruct | F32 | 208 MB | 1024 | Tiny model — near-instant responses |
+| Supra 50M Reasoning | F16 | 105 MB | 1024 | Tiny reasoning model |
+
+## Image Generation
+
+Image model presets load a Stable Diffusion or FLUX model instead of a text model. See [Image Models](/models/image-models) for full setup details.
+
+| Template Name | Backend | Size (est.) | Notes |
+|---|---|---|---|
+| Z-Image Turbo (Image) | FLUX-based | — | Uses Qwen3-4B clip + FLUX.1 VAE |
+| Flux Klein 4B (Image) | FLUX.2-Klein | — | Uses Qwen3-4B clip + Flux2 VAE |
+| Anything V5 (Image) | Stable Diffusion | 2.13 GB | Anime-style art |
+| Juggernaut XL (Image) | SDXL | 6.94 GB | Photorealistic |
+| Krea 2 Turbo (Image) | — | 6.87 GB | ⚠️ **BROKEN** — do not use |

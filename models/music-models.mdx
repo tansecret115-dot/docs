@@ -1,0 +1,68 @@
+---
+title: "Music Generation with AceStep in KoboldCPP Colab"
+sidebarTitle: "Music Models"
+description: "Generate music from text prompts using AceStep models in KoboldCPP Colab. Choose standard, fast, or XL variants based on your quality and speed preferences."
+---
+
+KoboldCPP Colab supports text-to-music generation via [AceStep 1.5](https://github.com/ace-step/AceStep), a diffusion-based music generation model. You describe the kind of music you want in a text prompt and AceStep produces an audio clip matching your description. Three variants are available — Standard, Fast, and XL — trading off between output quality and generation speed.
+
+<Warning>
+  Only **one** music model can be loaded at a time. Do not tick more than one of `LoadMusicModel`, `LoadFastMusicModel`, or `LoadMusicXLModel` simultaneously — loading multiple music models in the same session is not supported and will produce unexpected behaviour.
+</Warning>
+
+## Available variants
+
+| Checkbox | Variant | Diffusion Model | LM | Embeddings | Quality | Speed |
+|---|---|---|---|---|---|---|
+| `LoadMusicModel` | Standard | acestep-v15-sftturbo50 (Q8\_0) | 1.7B BF16 | Ace-Qwen3 0.6B BF16 | Best | Moderate |
+| `LoadFastMusicModel` | Fast | acestep-5Hz-lm-0.6B BF16 | 0.6B BF16 | Ace-Qwen3 0.6B Q8\_0 | Lower | Fastest |
+| `LoadMusicXLModel` | XL | acestep-v15-xl-sftturbo50 (Q4\_K\_M) | 4B Q6\_K | Ace-Qwen3 0.6B BF16 | Highest | Slowest |
+
+All three variants share the same **ace-vae** decoder and use the Qwen3 embedding model for text conditioning.
+
+<AccordionGroup>
+  <Accordion title="Standard — Best balance of quality and speed">
+    Uses the 1.7B AceStep LM with Q8\_0 diffusion weights and BF16 embeddings. This is the recommended starting point for most users. It produces high-quality musical output without the longer wait of the XL variant.
+
+    **Enable by checking:** `LoadMusicModel`
+  </Accordion>
+
+  <Accordion title="Fast — Quick previews and iteration">
+    Uses the smaller 0.6B AceStep LM as both the language model and diffusion backbone, with Q8\_0 embeddings. Generates music noticeably faster than the Standard variant at the cost of some output quality. Good for rapid iteration and prompt testing.
+
+    **Enable by checking:** `LoadFastMusicModel`
+  </Accordion>
+
+  <Accordion title="XL — Highest quality">
+    Uses the 4B AceStep XL diffusion model (Q4\_K\_M) and a Q6\_K 4B language model. Produces the best quality results but requires the most VRAM and the longest generation time. Recommended when you want polished output and are not in a hurry.
+
+    **Enable by checking:** `LoadMusicXLModel`
+  </Accordion>
+</AccordionGroup>
+
+## Steps to enable music generation
+
+<Steps>
+  <Step title="Choose your variant">
+    Decide which quality/speed tradeoff you want and tick **exactly one** of the following checkboxes:
+    - `LoadMusicModel` — Standard
+    - `LoadFastMusicModel` — Fast
+    - `LoadMusicXLModel` — XL
+  </Step>
+
+  <Step title="Click Play">
+    Run the cell. KoboldCPP downloads all required component files (LM, embeddings, diffusion model, VAE) and loads them. Once the Cloudflare URL appears, open it in your browser to access the music generation interface.
+  </Step>
+
+  <Step title="Enter a text prompt and generate">
+    In the KoboldCPP interface, navigate to the music generation section, enter a descriptive prompt (for example: *"upbeat lo-fi hip hop with soft piano, 90 BPM"*), and submit it to generate an audio clip.
+  </Step>
+</Steps>
+
+<Note>
+  The `--musiclowvram` flag is applied automatically to all three music variants. This reduces peak VRAM usage during generation at a minor performance cost, and it is necessary to avoid out-of-memory errors on Colab's free T4 GPU.
+</Note>
+
+<Tip>
+  You can combine a music model with a text model by ticking both `LoadMusicModel` (or a Fast/XL variant) **and** `LoadTextModel`. Keep in mind that running both simultaneously consumes more VRAM — use a smaller or more aggressively quantised text model (e.g. Q2\_K or IQ2\_XXS) when combining the two.
+</Tip>

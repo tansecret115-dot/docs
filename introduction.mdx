@@ -1,0 +1,64 @@
+---
+title: "KoboldCPP Colab Modded: What It Is and How It Works"
+sidebarTitle: "Introduction"
+description: "Learn what KoboldCPP Colab Modded is, how it uses Google Colab's free GPU to run AI models, and what model types are supported."
+---
+
+KoboldCPP Colab Modded is a modified Google Colab notebook built on top of [KoboldCpp](https://github.com/LostRuins/koboldcpp), an open-source LLM inference engine. It lets you run large language models, image generators, vision models, text-to-speech engines, music generators, and embedding models directly in Google Colab's cloud GPU environment — completely free, with no local hardware, no installation, and no technical setup required. A built-in Cloudflare tunnel gives you a public URL the moment the model finishes loading, so you can connect from any device or compatible app.
+
+## What you can do
+
+KoboldCPP Colab Modded supports a broad range of AI model types. Every category has curated preset templates that are pre-configured and ready to run.
+
+<CardGroup cols={2}>
+  <Card title="Text & Language Models" icon="message">
+    Run instruction-following assistants, roleplay characters, creative writing partners, and coding helpers using quantized GGUF language models.
+  </Card>
+  <Card title="Image Generation" icon="image">
+    Generate images from text prompts using Stable Diffusion and other diffusion-based models loaded directly in Colab.
+  </Card>
+  <Card title="Vision (Multimodal)" icon="eye">
+    Use models that accept both text and image inputs to analyze photos, answer visual questions, and describe scenes.
+  </Card>
+  <Card title="Speech & TTS" icon="microphone">
+    Convert text to natural-sounding speech using integrated text-to-speech models.
+  </Card>
+  <Card title="Music Generation" icon="music">
+    Generate original music and audio clips from text descriptions using AI music models.
+  </Card>
+  <Card title="Embeddings" icon="brackets-curly">
+    Produce vector embeddings for semantic search, retrieval-augmented generation, and similarity tasks.
+  </Card>
+</CardGroup>
+
+## How it works
+
+The notebook is designed to be as simple as possible. You do not need to understand the underlying infrastructure — just press play twice and you are connected.
+
+1. **Cell 1 — Keep-alive (optional):** The first cell plays a silent audio loop to prevent mobile browsers from throttling the background tab. You only need to run this cell if you are on a phone or tablet.
+2. **Cell 2 — Model launcher:** The second cell contains all the configuration options. Select a preset template from the dropdown (or configure a custom model manually), then press the play button. Colab allocates a GPU, downloads the model weights, and starts the KoboldCpp server.
+3. **Cloudflare tunnel URL:** Once the server is running, a Cloudflare tunnel URL appears at the bottom of the cell output. Copy that URL and open it in your browser or paste it into a compatible front-end app. The URL is unique to your session and changes each time you restart.
+
+<Note>
+  Keep the Colab tab open in your browser for the entire session — closing or navigating away from it will eventually cause the runtime to shut down. Check back occasionally, as Google may display a captcha to verify you are still present.
+</Note>
+
+## The two notebooks
+
+KoboldCPP Colab Modded provides two notebook variants depending on your needs and Colab plan.
+
+| Notebook | File | Best for |
+|---|---|---|
+| **Standard** | `colab.ipynb` | Free Colab tier with a T4 GPU. Suitable for most language models up to ~13B parameters and smaller image models. |
+| **L4 GPU** | `colabL4.ipynb` | Colab Pro or Pro+ with an L4 GPU. Better performance for larger models, higher-resolution image generation, and memory-intensive workloads. |
+
+Both notebooks share the same preset template library and configuration interface. Start with the standard notebook and switch to the L4 variant if you need more VRAM or faster inference.
+
+## Requirements
+
+KoboldCPP Colab Modded has minimal requirements — you do not need a powerful computer or any special software.
+
+- **A Google account** — needed to access and run Google Colab notebooks.
+- **A modern web browser** — Chrome, Firefox, Safari, and Edge all work. The Cloudflare tunnel URL is accessible from any device with an internet connection.
+
+That is it. Colab provides the GPU, storage, and compute. You just bring the browser.

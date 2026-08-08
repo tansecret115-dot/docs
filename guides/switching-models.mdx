@@ -1,0 +1,44 @@
+---
+title: "Switching Models in KoboldCPP Colab Modded"
+sidebarTitle: "Switching Models"
+description: "Change the active model in KoboldCPP Colab by updating the form settings and re-running the cell. Enable DeleteExistingModels to avoid storage issues."
+---
+
+To switch to a different model, update the form settings in the notebook cell and click play again. The notebook will download the new model and restart KoboldCpp automatically — no manual file management needed. The key thing to keep in mind before switching is stopping the currently running cell and making sure your storage is clear enough for the next download.
+
+## Steps to Switch Models
+
+<Steps>
+  <Step title="Stop the currently running cell">
+    Click the **stop button** (the square icon) next to the running cell. Wait for it to fully stop before making any changes. Running two model cells at the same time will cause conflicts and may crash the session.
+  </Step>
+  <Step title="Update your model settings">
+    In the notebook form, update the **Template** dropdown to select a preset, or manually adjust the **Model URL** field and any relevant checkboxes for a custom model. See the [Custom Models](/models/custom-models) page for details on each field.
+  </Step>
+  <Step title="Confirm DeleteExistingModels is checked">
+    The **DeleteExistingModels** option is enabled by default and deletes any existing `.gguf`, `.bin`, and `.ggml` files at the start of each run. Keep this checked to prevent Colab's disk from filling up, especially when swapping between large models.
+  </Step>
+  <Step title="Click Play to restart">
+    Click the play button to run the cell again. The notebook will download your new model and start KoboldCpp with your updated settings. A new Cloudflare tunnel URL will appear in the output when it's ready.
+  </Step>
+</Steps>
+
+<Warning>
+  Do not run two model cells at the same time. Always stop the currently running cell before starting a new one. Running them simultaneously can cause port conflicts, memory errors, or session crashes.
+</Warning>
+
+<Info>
+  Colab's free tier provides approximately 75–100 GB of temporary disk space per session. Large models (10 GB or more) can fill this quickly. **DeleteExistingModels** is your main safeguard against running out of space mid-session.
+</Info>
+
+## Managing Disk Space
+
+Each time you switch models, the old model file stays on disk unless **DeleteExistingModels** is enabled. A single 13B model at Q6 quantization can be 10–12 GB; loading two or three different models in the same session will exhaust the available storage.
+
+<Tip>
+  If you plan to test multiple models in the same session, keep **DeleteExistingModels** checked throughout. If you accidentally fill the disk, restart the Colab runtime (Runtime → Restart runtime) to get a fresh environment with empty storage.
+</Tip>
+
+<Note>
+  Model download speed varies depending on HuggingFace server load and Colab's current network conditions. Downloads use **aria2** for faster parallel chunk downloading, which is significantly quicker than a standard single-connection download. Even so, a 10 GB+ model can still take several minutes.
+</Note>

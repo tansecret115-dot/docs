@@ -1,0 +1,40 @@
+---
+title: "Save Stories to Google Drive with KoboldCPP Colab"
+sidebarTitle: "Google Drive"
+description: "Persist your KoboldCPP stories and saves across Colab sessions by enabling Google Drive integration. Access saves from the KoboldCpp Server Storage menu."
+---
+
+By default, everything inside a Colab runtime is ephemeral — the moment your session disconnects or times out, any stories or chat history you haven't saved elsewhere are gone. Enabling Google Drive integration solves this by writing your saves to a persistent JSON database in your own Drive, so you can pick up exactly where you left off the next time you start a session.
+
+## How to Enable Google Drive Saves
+
+<Steps>
+  <Step title="Check AllowSaveToGoogleDrive">
+    In the notebook's form cell, tick the **AllowSaveToGoogleDrive** checkbox.
+  </Step>
+  <Step title="Play the cell">
+    Click the play button. The notebook will mount your Google Drive and a Google authorization dialog will appear in the cell output.
+  </Step>
+  <Step title="Grant permissions">
+    Follow the on-screen prompts and grant the permissions that Google requests. This allows Colab to read and write files in your Drive.
+  </Step>
+  <Step title="Locate your save file">
+    Once authorized, your saves are stored at:
+    **Google Drive → KoboldCpp_data → koboldcpp_save_db.jsondb**
+  </Step>
+  <Step title="Access saves in the KoboldCpp UI">
+    Inside the KoboldCpp web interface, open the **KoboldCpp Server Storage** menu to load, save, or manage your stories.
+  </Step>
+</Steps>
+
+<Warning>
+You must grant Google Drive permissions when the authorization dialog appears. If you dismiss or skip the dialog, the save path will not be created and saving will fail silently — you won't see an error, but your stories won't be written to Drive.
+</Warning>
+
+<Note>
+The save file is a JSON database managed entirely by KoboldCpp. Do not manually edit `koboldcpp_save_db.jsondb` — doing so may corrupt your saves.
+</Note>
+
+<Tip>
+Google Drive saves are especially valuable for long collaborative stories or ongoing roleplay campaigns where losing progress would be disruptive. Enable this option from the very start of any session you care about.
+</Tip>

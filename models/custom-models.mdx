@@ -1,0 +1,85 @@
+---
+title: "Load Any GGUF Model in KoboldCPP Colab"
+sidebarTitle: "Custom Models"
+description: "Override the preset templates and load any GGUF model from HuggingFace by enabling the LoadTextModel checkbox and entering your model URL."
+---
+
+While the preset templates cover a wide range of popular models, you are not limited to them. By enabling the `LoadTextModel` checkbox you can point KoboldCPP Colab at any GGUF file hosted on HuggingFace — as long as the URL is a direct download link to the `.gguf` file, the notebook will download and run it automatically. This lets you experiment with any quantisation, any model family, or any fine-tune that has been exported to the GGUF format.
+
+<Warning>
+  Ticking **any** loader checkbox (`LoadTextModel`, `LoadImgModel`, `LoadVisionMMProjector`, etc.) immediately overrides the **Template** dropdown. The template selection is ignored whenever a checkbox is enabled.
+</Warning>
+
+## Steps to load a custom model
+
+<Steps>
+  <Step title="Tick the LoadTextModel checkbox">
+    In the notebook cell, check the **LoadTextModel** box. This tells KoboldCPP to use the `Model` field instead of the template preset.
+  </Step>
+
+  <Step title="Paste a HuggingFace direct GGUF URL into the Model field">
+    Replace the default URL in the **Model** field with a direct link to your chosen `.gguf` file. The URL must point to the raw file — use the `resolve/main/` URL pattern:
+
+    ```
+    https://huggingface.co/KoboldAI/LLaMA2-13B-Tiefighter-GGUF/resolve/main/LLaMA2-13B-Tiefighter.Q4_K_M.gguf
+    ```
+
+    You can also type a URL directly into the field; it is a free-text input even though it shows a dropdown of recent examples.
+  </Step>
+
+  <Step title="Set ContextSize from the dropdown">
+    Choose the context window size that suits your model and use case. Larger contexts use more VRAM.
+
+    | Value | Notes |
+    |---|---|
+    | 4096 | Safe minimum for most models |
+    | 8192 | Good balance for 7B–13B models |
+    | 12288 | — |
+    | 16384 | Common for Gemma 2/3/4 models |
+    | 24576 | — |
+    | 32768 | Good for long-document tasks |
+    | 49152 | High — requires VRAM headroom |
+    | 65536 | Maximum; may cause OOM on free T4 |
+
+    You can also type a custom value directly into the field.
+  </Step>
+
+  <Step title="Set Layers">
+    The **Layers** dropdown controls how many model layers are offloaded to the GPU.
+
+    - **Auto** — KoboldCPP decides based on available VRAM. This is the recommended setting for most users.
+    - **999** — Forces all layers onto the GPU. Use this if you want maximum speed and know your model fits in VRAM.
+
+    You can also type a specific integer if you want partial GPU offloading.
+  </Step>
+
+  <Step title="Click Play">
+    Run the notebook cell. KoboldCPP will download your model, load it, and print a Cloudflare tunnel URL you can open in your browser.
+  </Step>
+</Steps>
+
+## How to find GGUF URLs on HuggingFace
+
+Most popular models have community GGUF conversions on HuggingFace, often uploaded by `bartowski`, `mradermacher`, `TheBloke`, or `unsloth`. Here is how to get the correct direct URL:
+
+1. Go to the model page on [huggingface.co](https://huggingface.co).
+2. Click the **Files and versions** tab.
+3. Find the `.gguf` file you want — pick a quantisation that matches your VRAM budget (Q4\_K\_S or Q4\_K\_M are good starting points for most models on a free T4 GPU).
+4. Click the **copy link** icon next to the file, or click the filename and copy the URL from your browser, then replace `/blob/main/` with `/resolve/main/` so the link becomes a direct download.
+
+**Example pattern:**
+```
+https://huggingface.co/<author>/<repo>/resolve/main/<filename>.gguf
+```
+
+<Tip>
+  Quantisation guide: `Q4_K_S` / `Q4_K_M` offer the best quality-to-size ratio for most models. `IQ2_XXS` / `Q2_K` fit larger models into limited VRAM at the cost of some quality. `Q8_0` gives near-lossless quality but requires significantly more VRAM.
+</Tip>
+
+## DeleteExistingModels
+
+The **DeleteExistingModels** checkbox is enabled by default. Each time you run the cell it deletes any previously downloaded `.gguf`, `.bin`, and `.ggml` files from the Colab instance before downloading your selected model fresh. This prevents leftover files from filling up disk space across multiple runs.
+
+<Note>
+  If you want to keep a previously downloaded model and avoid re-downloading it, uncheck **DeleteExistingModels** before clicking Play. Be aware that Colab's ephemeral storage means files are lost when the runtime disconnects regardless.
+</Note>
